@@ -2,20 +2,20 @@ sudo: required
 services: -docker
 
 before_install:
-  - docker build -t manish0870/test -f ./client/Dockerfile.dev ./client
+  - docker build -t TEST -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true manish0870/test npm run test
+  - docker run -e CI=true TEST npm run test
 
 after_success:
-  - docker build -t manish0870/multi-client ./client
-  - docker build -t manish0870/multi-nginx ./nginx
-  - docker build -t manish0870/multi-server ./server
-  - docker build -t manish0870/multi-worker ./worker
+  - docker build -t redhook/multi-client ./client
+  - docker build -t redhook/multi-nginx ./nginx
+  - docker build -t redhook/multi-server ./server
+  - docker build -t redhook/multi-worker ./worker
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push manish0870/multi-client
-  - docker push manish0870/multi-nginx
-  - docker push manish0870/multi-server
-  - docker push manish0870/multi-worker
+  - docker push redhook/multi-client
+  - docker push redhook/multi-nginx
+  - docker push redhook/multi-server
+  - docker push redhook/multi-worker
