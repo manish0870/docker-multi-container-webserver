@@ -2,10 +2,10 @@ sudo: required
 services: -docker
 
 before_install:
-  - docker build -t TEST -f ./client/Dockerfile.dev ./client
+  - docker build -t redhook/test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true TEST npm run test
+  - docker run -e CI=true redhook/test npm run test
 
 after_success:
   - docker build -t redhook/multi-client ./client
